@@ -8,5 +8,5 @@ pdfurl: 'https://arxiv.org/abs/2403.12011'
 codeurl: 'https://github.com/Mq-Zhang1/HOIDiffusion'
 projecturl: 'https://mq-zhang1.github.io/HOIDiffusion'
 teaser: 'hoidiffusion_thumbnail.avif'
-authors: "Mengqi Zhang*, Yang Fu*, Zheng Ding, Sifei Liu, Zhuowen Tu, Xiaolong Wang"
+authors: "Mengqi Zhang<sup>*</sup>, Yang Fu<sup>*</sup>, Zheng Ding, Sifei Liu, Zhuowen Tu, Xiaolong Wang"
 ---

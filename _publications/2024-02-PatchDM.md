@@ -8,5 +8,5 @@ pdfurl: 'https://arxiv.org/abs/2308.01316'
 codeurl: 'https://github.com/mlpc-ucsd/patch-dm'
 projecturl: 'https://patchdm.github.io'
 teaser: 'patchdm-thumbnail.png'
-authors: "Zheng Ding*, Mengqi Zhang*, Jiajun Wu, and Zhuowen Tu."
+authors: "Zheng Ding<sup>*</sup>, Mengqi Zhang<sup>*</sup>, Jiajun Wu, and Zhuowen Tu."
 ---
