@@ -14,7 +14,7 @@ I am broadly interested in computer vision problems, expecially generative model
 
 - \[2024.08\] I join Georgia Tech for Ph.D under the supervision of [Prof. Judy Hoffman](<(https://faculty.cc.gatech.edu/~judy/)>).
 - \[2024.02\] [HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data](https://github.com/Mq-Zhang1/HOIDiffusion) is accepted to CVPR 2024.
-- \[2024.01\] [3D Reconstruction with Generalizable Neural Fields using Scene Prior](https://oasisyang.github.io/neural-prior/) is accepted to ICLR 2024.
+- \[2024.01\] [Patched Denoising Diffusion Models For High-Resolution Image Synthesis](https://patchdm.github.io) is accepted to ICLR 2024.
 
 <h1 class="page__title">Publications</h1>
 
