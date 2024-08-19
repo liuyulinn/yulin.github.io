@@ -21,7 +21,7 @@ repository               : "mq-zhang1/mq-zhang1.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "images/mengqi_profile.png"
+  avatar           : "images/mengqi_profile.jpg"
   name             : "Mengqi Zhang"
   pronouns         : # example: "she/her"  
   bio              : "1st year Ph.D @ GT"
