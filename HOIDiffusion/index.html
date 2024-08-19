@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data">
+  <meta name="keywords" content="HOIDiffusion, Diffusion, HOI, hand-object-interaction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.20.0/gradio.js" ></script>
+  <script src="./static/js/juxtapose.js"></script>
+</head>
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Mengqi Zhang<sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://oasisyang.github.io/">Yang Fu</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              Zheng Ding<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://research.nvidia.com/person/sifei-liu">Sifei Liu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pages.ucsd.edu/~ztu/">Zhuowen Tu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of California, San Diego</span>
+            <span class="author-block"><sup>2</sup>NVIDIA</span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">(* equal contribution)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2403.12011"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2403.12011"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/YD_buFwMX44"
+                   class="external-link button is-normal is-rounded is-dark">
+                   <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Mq-Zhang1/HOIDiffusion"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+          <div class="column is-full-width">
+            <video autoplay muted loop height="100%">
+              <source src="static/images/teaser_video.mp4" type="video/mp4">
+            </video>
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="carousel results-carousel">
+        <div class="item item-steve">
+          <video autoplay muted loop playsinline>
+            <source src="static/images/teaser/result_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video autoplay muted loop playsinline>
+            <source src="static/images/teaser/result_2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video autoplay muted loop playsinline>
+            <source src="static/images/teaser/result_3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <h2 class="subtitle has-text-centered" style="font-size:17px;">
+      <!-- <span style="color: orange; font-weight:bold">Without using any mask annotations</span>, GroupVit groups the image into segments and outputs a semantic segmentation map. -->
+      HOIDiffusion generates high quality hand-object
+        interaction images conditioned on physical structures 
+        and detailed text description.  
+    </h2>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/teaser.pdf" alt="">
+      <h2 class="subtitle has-text-justified" style="font-size:17px;">
+        HOIDiffusion generates high quality hand-object
+        interaction images conditioned on physical structures 
+        and detailed text description. The model disentangles 
+        the geometry from appearance,
+        exhibiting high generation diversity.   
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+    <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Abstract</h2>
+        <div class="content has-text-justified" style="font-size:18px;">
+          <p>
+            3D hand-object interaction data is scarce due to the hardware constraints in scaling up 
+            the data collection process. In this paper, we propose HOIDiffusion for generating realistic 
+            and diverse 3D hand-object interaction data. Our model is a conditional diffusion model that 
+            takes both the 3D hand-object geometric structure and text description as inputs for image 
+            synthesis. This offers a more controllable and realistic synthesis as we can specify the 
+            structure and style inputs in a disentangled manner. HOIDiffusion is trained by leveraging a 
+            diffusion model pre-trained on large-scale natural images and a few 3D human demonstrations. 
+            Beyond controllable image synthesis, we adopt the generated 3D data for learning 6D object pose 
+            estimation and show its effectiveness in improving perception systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container is-max-desktop">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-full-width">
+      <h2 class="title is-3">Video</h2>
+      <div class="publication-video">
+        <iframe width="560" height="315" 
+            src="https://www.youtube.com/embed/zwwuHkytOn8?si=k_vrocafeJahjVHW"  
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+  </div>
+</div> -->
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+      <!-- Method. -->
+      <div class="columns is-centered">
+          <div class="column is-full-width">
+            <video autoplay muted loop height="100%">
+              <source src="static/images/teaser.mp4" type="video/mp4">
+            </video>
+          </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+      <!-- Method. -->
+      <div class="columns is-centered">
+          <div class="column is-full-width">
+              <h2 class="title is-3">Approach</h2>
+              <p> We inject three conditional encoders into the stable diffusion model. We utilize both the HOI datasets and
+                high-quality background images to train HOIDiffusion. The background images are synthesized using the scenery prompts from pretrained model. The texts sent
+                to the model are output by LLaVA for detailed description. </p>
+              </br>  
+
+              <img src="static/images/main_model.png" alt="">
+          </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+            <h2 class="title is-3">Data Generation Pipeline</h2>
+            <p> We propose a two-stage pipeline to synthesize hand-object-interaction data. During the first stage, we utilize a
+              pretrained GrabNet to output 3D hand poses given by a single object model. Then in the second stage, we use those 3D hand poses along
+              with segmentation maps, normal maps and skeletons to conditionally generate high-quality HOI data. </p>
+            </br> 
+
+            <img src="static/images/pipeline.png" alt="">
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Real-Style Image Generation</h2>
+    <p> Generated images with the same background description but different object shapes, poses, and hand skeletons. HOIDiffusion could generate more realistic images similar to
+      the style in training datasets. </p>
+    </br> 
+    
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth">
+        <!-- <img src="static/images/structure_control.pdf" alt=""> -->
+        <video autoplay muted loop playsinline height="100%">
+          <source src="static/images/structure_control.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+  <div class="container is-max-desktop">
+    <h3 class="title is-3">Appearance Control</h3>
+    <p>We explore the ability of HOIDiffusion to control the appearance of objects, 
+      with different colors or styles unseen in training data. 
+      The geometry is fixed for every input. Through background regularization and classifier-free
+      guidance, our model exhibits the ability to depict diverse contents, retaining control over appearance using text prompts.</p>
+    </br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-fullwidth mt2 mr5 ml5">
+        <img src="static/images/app_control.png" alt="">
+      </div>
+    </div>
+
+  <h4 class="title is-4">-> More Results on Object Control</h4>
+  <p> HOIDiffusion is able to control the appearance of objects. <b style="color: #d62728">Provided prompt: "A hand is grasping a [style] [object]"</b></p>
+  <!-- First Row -->
+  <div class="columns is-centered has-text-centered" style="margin-bottom: -40px;">
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_pink"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_pink',
+            [
+                {
+                    src: 'static/images/appear_image/pink/real1.png',
+                },
+                {
+                    src: 'static/images/appear_image/pink/pink1.png',
+                    label: 'Pink',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_gothic"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_gothic',
+            [
+                {
+                    src: 'static/images/appear_image/gothic/real1.png',
+                },
+                {
+                    src: 'static/images/appear_image/gothic/gothic1.png',
+                    label: 'Gothic',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_mediaval"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_mediaval',
+            [
+                {
+                    src: 'static/images/appear_image/mediaval/real1.png',
+                },
+                {
+                    src: 'static/images/appear_image/mediaval/mediaval1.png',
+                    label: 'Mediaval',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_metal"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_metal',
+            [
+                {
+                    src: 'static/images/appear_image/metal/real1.png',
+                },
+                {
+                    src: 'static/images/appear_image/metal/metal1.png',
+                    label: 'Metal',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Second Row -->
+<div class="columns is-centered has-text-centered" >
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_2_pink"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_2_pink',
+            [
+                {
+                    src: 'static/images/appear_image/pink/real3.png',
+                },
+                {
+                    src: 'static/images/appear_image/pink/pink3.png',
+                    label: 'Pink',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_2_gothic"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_2_gothic',
+            [
+                {
+                    src: 'static/images/appear_image/gothic/real2.png',
+                },
+                {
+                    src: 'static/images/appear_image/gothic/gothic2.png',
+                    label: 'Gothic',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_2_mediaval"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_2_mediaval',
+            [
+                {
+                    src: 'static/images/appear_image/mediaval/real2.png',
+                },
+                {
+                    src: 'static/images/appear_image/mediaval/mediaval2.png',
+                    label: 'Mediaval',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_2_metal"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_2_metal',
+            [
+                {
+                    src: 'static/images/appear_image/metal/real2.png',
+                },
+                {
+                    src: 'static/images/appear_image/metal/metal2.png',
+                    label: 'Metal',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Background Control -->
+<h4 class="title is-4">->More Results on Background Control</h4>
+  <p> We present more generated hand-object-interaction images with various background prompts, from
+    everyday scenarios to special contexts. 
+    <b style="color: #d62728">Provided prompt: "A hand is grasping a [object] [background]"</b></p>
+  <!-- First Row -->
+  <div class="columns is-centered has-text-centered" style="margin-bottom: -40px;">
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_alien"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_alien',
+            [
+                {
+                    src: 'static/images/back_image/alien/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/alien/alien1.png',
+                    label: 'Alien City',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_atlantic"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_atlantic',
+            [
+                {
+                    src: 'static/images/back_image/atlantic/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/atlantic/atlantic1.png',
+                    label: 'Atlantis City',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_grand"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_grand',
+            [
+                {
+                    src: 'static/images/back_image/grand/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/grand/grand1.png',
+                    label: 'Grand Canyon',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_japan"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_japan',
+            [
+                {
+                    src: 'static/images/back_image/japan/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/japan/japan1.png',
+                    label: 'Japanese garden',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Row -->
+<div class="columns is-centered has-text-centered" >
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_neo"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_neo',
+            [
+                {
+                    src: 'static/images/back_image/neo/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/neo/neo1.png',
+                    label: 'Neon-lit Club',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_sand"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_sand',
+            [
+                {
+                    src: 'static/images/back_image/sand/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/sand/sand1.png',
+                    label: 'Sand',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_sea"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_sea',
+            [
+                {
+                    src: 'static/images/back_image/sea/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/sea/sea1.png',
+                    label: 'Sea',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-right: -10px;">
+    <div class="content">
+      <br>
+      <div class="tab_container">
+        <div id="row_1_snow"></div>
+        <script>
+        slider = new juxtapose.JXSlider('#row_1_snow',
+            [
+                {
+                    src: 'static/images/back_image/snow/real1.png',
+                },
+                {
+                    src: 'static/images/back_image/snow/snow1.png',
+                    label: 'Snow',
+                }
+            ],
+            {
+                animate: true,
+                showLabels: true,
+                showCredits: true,
+                startingPosition: "30%",
+                makeResponsive: true
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <h2 class="title is-3">6D Object Pose Estimation</h2>
+    <p>We explore the potential for improving categorical object 6D pose estimation 
+      task with our generated HOI data, anticipating the reality brought by
+      our data could help enhance model performance.</p>
+    </br>
+    <div class="columns">
+    <div class="column has-text-centered">
+      <video autoplay muted loop height="100%">
+        <source src="static/images/downstream.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <p>Visualization of object pose estimation results.</p>
+    <div class="columns">
+      <div class="column has-text-centered">
+        <video autoplay muted loop height="100%">
+          <source src="static/videos/object_pose.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+</section>  
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe width="560" height="315" 
+              src="https://www.youtube.com/embed/YD_buFwMX44?si=ln2lPakOz1PPRYSQ"  
+              title="YouTube video player" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{zhang2024hoidiffusion,
+      title={HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data},
+      author={Zhang, Mengqi and Fu, Yang and Ding, Zheng and Liu, Sifei and Tu, Zhuowen and Wang, Xiaolong},
+      journal={arXiv preprint arXiv:2403.12011},
+      year={2024}
+    }</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+      <div class="columns is-centered">
+          <div class="content">
+              <p>
+                  The template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+              </p>
+          </div>
+      </div>
+  </div>
+</footer>
+
+</body>
+</html>
