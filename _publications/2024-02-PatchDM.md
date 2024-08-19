@@ -7,6 +7,6 @@ venue: 'ICLR 2024'
 pdfurl: 'https://arxiv.org/abs/2308.01316'
 codeurl: 'https://github.com/mlpc-ucsd/patch-dm'
 projecturl: 'https://patchdm.github.io'
-teaser: 'images/patchdm-thumbnail.png'
+teaser: 'patchdm-thumbnail.png'
 authors: "Zheng Ding*, <strong>Mengqi Zhang*</strong>, Jiajun Wu, and Zhuowen Tu."
 ---
