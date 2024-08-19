@@ -1,7 +1,7 @@
 ---
 title: "Patched Denoising Diffusion Models For High-Resolution Image Synthesis"
 collection: publications
-permalink: /publication/2024-PatchDM
+permalink: /publication/2024-02-PatchDM
 date: 2023-08-02
 venue: 'ICLR 2024'
 pdfurl: 'https://arxiv.org/abs/2308.01316'

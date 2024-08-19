@@ -1,7 +1,7 @@
 ---
 title: "HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data"
 collection: publications
-permalink: /publication/2024-HOIDiffusion
+permalink: /publication/2024-03-HOIDiffusion
 date: 2024-03-18
 venue: 'CVPR 2024'
 pdfurl: 'https://arxiv.org/abs/2403.12011'
