@@ -8,6 +8,15 @@ redirect_from:
 ---
 I am currently a first-year Ph.D student in Computer Science (CS) at Georgia Tech, where I am honored to be advised by [Prof. Judy Hoffman](https://faculty.cc.gatech.edu/~judy/). Before that, I obtained my M.S. in Electrical and Computer Engineering at UC San Diego in 2023, supervised by [Prof.Zhuowen Tu](https://pages.ucsd.edu/~ztu/) and [Prof. Xiaolong Wang](https://xiaolonw.github.io). I received my B.E. from Zhejiang University in 2021.
 
+I am broadly interested in computer vision problems, expecially generative models, 3D vision, and multi-modality.
+
+<h1 class="page__title">Publications</h1>
+
+{% for post in site.publications reversed %}
+{% include archive-single.html %}
+{% endfor %}
+
+
 
 A data-driven personal website
 ======
