@@ -9,7 +9,7 @@ html {
 
 body {
   margin: 0;
-  padding: $masthead-height 0 0;
+  padding: 0;
   padding-bottom: 9em;
   color: $text-color;
   font-family: $global-font-family;
@@ -57,9 +57,9 @@ small, .small {
   font-size: $type-size-6;
 }
 
-p {
-  margin-bottom: 1.3em;
-}
+// p {
+//   margin-bottom: 1.3em;
+// }
 
 u,
 ins {
@@ -157,7 +157,8 @@ hr {
   display: block;
   margin: 1em 0;
   border: 0;
-  border-top: 1px solid $border-color;
+  // border-top: 1px solid $border-color;
+  border-top: 1px dashed mix(#fff, $text-color, 25%);
 }
 
 /* lists */
