@@ -2,7 +2,7 @@
 title: "MeshFormer: High-Quality Mesh Generation with 3D-Guided Reconstruction Model"
 collection: publications
 permalink: /publication/2024-08-MeshFormer
-date: 2024-08-19
+date: 2024-08-18
 venue: 'NeurIPS 2024'
 pdfurl: 'https://www.arxiv.org/abs/2408.10198'
 projecturl: 'https://meshformer3d.github.io'
