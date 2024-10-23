@@ -1,20 +1,22 @@
 ---
 permalink: /
-title: "Mengqi Zhang"
+title: "Yulin Liu (刘雨霖)"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
-I am currently a first-year Ph.D student in Computer Science (CS) at Georgia Tech, where I am honored to be advised by [Prof. Judy Hoffman](https://faculty.cc.gatech.edu/~judy/). Before that, I obtained my M.S. in Electrical and Computer Engineering at UC San Diego in 2023, supervised by [Prof.Zhuowen Tu](https://pages.ucsd.edu/~ztu/) and [Prof. Xiaolong Wang](https://xiaolonw.github.io). I received my B.E. from Zhejiang University in 2021.
 
-I am broadly interested in computer vision problems, expecially generative models, 3D vision, and multi-modality.
+I'm a 2nd year Ph.D student at Computer Science & Engineering Department, University of California San Diego, where I am honored to be advised by Prof. [Hao Su](https://cseweb.ucsd.edu/~haosu/). I received my Bachelor degree at Department of Physics, Peking University, where I am fortunate to be advised Prof. [He Wang](https://hughw19.github.io/). 
+
+My research interest lies broadly in 3D computer vision (especially perception) and Robotics Manipulation.
+
 
 <h1 class="page__title">News</h1>
 
-- \[2024.08\] I join Georgia Tech for Ph.D under the supervision of [Prof. Judy Hoffman](<(https://faculty.cc.gatech.edu/~judy/)>).
-- \[2024.02\] [HOIDiffusion: Generating Realistic 3D Hand-Object Interaction Data](https://github.com/Mq-Zhang1/HOIDiffusion) is accepted to CVPR 2024.
-- \[2024.01\] [Patched Denoising Diffusion Models For High-Resolution Image Synthesis](https://patchdm.github.io) is accepted to ICLR 2024.
+- \[2023.06\] I begin my internship in [Hillbot](https://www.hillbot.ai/).
+- \[2023.09\] I join UC, San Diego for Ph.D. under supervision of Prof. [Hao Su](https://cseweb.ucsd.edu/~haosu/).
+- \[2023.03\] [RotationNormFlow](https://pku-epic.github.io/RotationNormFlow/) is accepted to CVPR 2023.
 
 <h1 class="page__title">Publications</h1>
 
@@ -22,5 +24,9 @@ I am broadly interested in computer vision problems, expecially generative model
 {% include archive-single.html %}
 {% endfor %}
 
+Services
+======
+
+Reviewer for ICRA 23. 
 
 

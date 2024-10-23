@@ -8,31 +8,31 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Mengqi Zhang's Homepage"
+title                    : "Yulin Liu's Homepage"
 title_separator          : "-"
-name                     : &name "Mengqi Zhang"
-description              : &description "PhD student @ GT"
-url                      : https://mq-zhang1.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+name                     : &name "Yulin Liu"
+description              : &description "PhD student @ UCSD"
+url                      : https://liuyulinn.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "mq-zhang1/mq-zhang1.github.io"
+repository               : "liuyulinn/liuyulinn.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "mengqi_profile.jpg"
-  name             : "Mengqi Zhang"
+  avatar           : "profile.png"
+  name             : "Yulin Liu"
   pronouns         : # example: "she/her"  
-  bio              : "Ph.D Student @ GT"
-  location         : "Atlanta, GA"
+  bio              : "Ph.D Student @ UCSD"
+  location         : "San Diego, CA"
   employer         : 
   uri              : # URL
-  email            : "mq.zhang7@outlook.com" 
+  email            : "yul266@ucsd.edu" 
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=N1jzRPEAAAAJ&hl=en"
+  googlescholar    : "https://scholar.google.com/citations?hl=en&user=Irlb8M8AAAAJ"
   impactstory      : # URL
   orcid            : 
   semantic         : # URL
@@ -43,7 +43,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "mq-zhang1"
+  github           : "liuyulinn"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
@@ -57,7 +57,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "https://www.linkedin.com/in/yulin-liu-45817a271/"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
